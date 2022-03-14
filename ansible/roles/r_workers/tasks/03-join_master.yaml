@@ -1,4 +1,7 @@
 ---
-- name: Unir nodo al master
-  debug:
-    msg: Debo tener la IP, PORT, TOKEN y CERT HASH
+- name: Join worker al cluster
+  command: "{{ item }}"
+  with_file:
+    - "{{ file_token }}"
+  become: yes
+  become_method: sudo

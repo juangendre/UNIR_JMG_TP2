@@ -1,5 +1,12 @@
 ---
 
+- name: Token
+  command: 'kubeadm token create --print-join-command'
+  register: kubeadm_out
+
+- name: archivo token.conf
+  local_action: copy content="{{ kubeadm_out.stdout_lines[0] }}" dest="{{ file_token }}"
+
 - name: Reiniciar equipo
   reboot:
     msg: "Reinicio post instalacion"

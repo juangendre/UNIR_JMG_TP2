@@ -4,16 +4,36 @@
 #    name: "{{ packages_nfs }}"
 #    state: present
 
+- name: 2 - Enable service nfs-utils
+  command: systemctl enable nfs-utils.service
+    #name: nfs-utils
+    #state: started
+    #enabled: yes
+
+- name: 2.1 - Start service nfs-utils
+  command: systemctl start nfs-utils.service
+    #name: nfs-utils
+    #state: started
+    #enabled: yes
 - name: 2 - Enable service nfs-server
-  ansible.builtin.systemd:
-    name: nfs-server
-    state: started
-    enabled: yes
+  command: systemctl enable nfs-server.service
+    #name: nfs-utils
+    #state: started
+    #enabled: yes
+
+- name: 2.1 - Start service nfs-server
+  command: systemctl start nfs-server.service
+    #name: nfs-utils
+    #state: started
+    #enabled: yes
 
 - name: 3 - Crear carpeta /srv/nfs
   file:
     path: /srv/nfs
     state: directory
+  
+- name: 3.1 - Cambio permisos dir compartido.
+  command: chmod 777 -R /srv 
 
 - name: 4.1- Configurar master y workers para acceso al nfs en /etc/exports
   lineinfile:
@@ -34,6 +54,4 @@
   loop: '{{ fw_services }}'
 
 - name: 5.2 - Recargar el servicio firewall
-  systemd:
-    name: firewalld
-    state: reloaded
+  command: systemctl restart firewalld.service

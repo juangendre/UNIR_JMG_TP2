@@ -5,7 +5,7 @@ ports_master_firewall:
   - port: 2379-2380
     protocol: tcp
 
-  - port: 10250-10252
+  - port: 10200-10300
     protocol: tcp
 
   - port: 10255
@@ -16,6 +16,10 @@ ports_master_firewall:
 
   - port: 8472
     protocol: udp
+  
+  - port: 25000-65000
+    protocol: tcp
+
   
   firewall_workers_rules:
   - rule: 1

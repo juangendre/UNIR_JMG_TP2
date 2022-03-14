@@ -3,6 +3,7 @@
 - hosts: workers
   vars_files:
     - 'group_vars/kube.yaml'
+    - 'group_vars/vars_workers.yaml'
   gather_facts: false
   roles:
     - role: r_requisitos

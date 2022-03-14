@@ -1,8 +1,15 @@
 ---
-
-- name: Token
+- name: Obtengo token para unir nodo.
   command: 'kubeadm token create --print-join-command'
-  register: kubeadm_out
+  register: kubeadm_token
 
-- name: archivo token.conf
-  local_action: copy content="{{ kubeadm_out.stdout_lines[0] }}" dest="{{ file_token }}"
+- debug:
+    msg: 'Comando a ejecutar : {{ kubeadm_token.stdout_lines[0] }}'
+
+- debug:
+    msg: 'Guardo token en archivo : {{ token_file }}'
+
+- name: Guardo token master en archivo para workers
+  local_action: copy content="{{ kubeadm_token.stdout_lines[0] }}" dest="{{ token_file }}"
+  become: false
+  run_once: true

@@ -11,3 +11,5 @@ ports_workers_firewall:
 
   - port: 30000-65000
     protocol: tcp
+  
+ token_file: "./r_workers/files/token.conf"

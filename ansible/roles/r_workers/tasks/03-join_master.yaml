@@ -2,6 +2,6 @@
 - name: Join worker al cluster
   command: "{{ item }}"
   with_file:
-    - "{{ file_token }}"
+    - "{{ token_file }}"
   become: yes
   become_method: sudo

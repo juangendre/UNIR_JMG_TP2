@@ -1,0 +1,4 @@
+- name: actualizo pkg's
+  command: dnf upgrade -y 
+  become: yes
+  become_method: sudo

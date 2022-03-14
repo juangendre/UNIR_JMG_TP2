@@ -12,7 +12,7 @@
 
 - include_tasks: 06-Obtengo_lista_nodos.yaml
 
-- include_tasks: 07-install_calico_old.yaml
+- include_tasks: 07-install_calico.yaml
 
 - include_tasks: 08-install_ingress.yaml
 

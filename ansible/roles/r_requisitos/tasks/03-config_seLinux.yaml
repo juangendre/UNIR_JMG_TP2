@@ -1,9 +1,6 @@
 ---
-- name: Configuro SELinuc
-  #vars:
-  #  selinux_status: disabled # El estado puede ser disabled | enforcing
+- name: Configuro SELinux
   selinux:
-    state: '{{ selinux_status | mandatory }}'
-
+    state: 'disabled'
   become: yes
   become_method: sudo

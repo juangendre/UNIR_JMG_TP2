@@ -1,0 +1,39 @@
+---
+- name: 1 - install packages nfs
+  dnf:
+    name: "{{ packages_nfs }}"
+    state: present
+
+- name: 2 - Enable service nfs-server
+  ansible.builtin.systemd:
+    name: nfs-server
+    state: started
+    enabled: yes
+
+- name: 3 - Crear carpeta /srv/nfs
+  file:
+    path: /srv/nfs
+    state: directory
+
+- name: 4.1- Configurar master y workers para acceso al nfs en /etc/exports
+  lineinfile:
+    dest: /etc/exports
+    regexp: '.*{{ item }}.*'
+    line: '/srv/nfs	{{ item }}(rw,sync)'
+    state: present
+  loop: '{{ ip_access }}'
+
+- name: 4.2 Aplicar configuración a /etc/exports
+  command: 'exportfs -r'
+
+- name: 5.1 - Abrir puertos de los servicios nfs"
+  firewalld:
+    service: '{{ item }}'
+    permanent: yes
+    state: enabled
+  loop: '{{ fw_services }}'
+
+- name: 5.2 - Recargar el servicio firewall
+  systemd:
+    name: firewalld
+    state: reloaded

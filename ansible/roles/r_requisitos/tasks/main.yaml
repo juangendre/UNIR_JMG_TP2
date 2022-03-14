@@ -1,12 +1,12 @@
 ---
 
+- include_tasks: 00-defaults.yaml
+
 - include_tasks: 01-config_timezone.yaml
 
 - include_tasks: 02-config_hosts.yaml
 
 - include_tasks: 03-config_seLinux.yaml
-  vars:
-    selinux_status: disabled
 
 - include_tasks: 04-config_firewall.yaml
 

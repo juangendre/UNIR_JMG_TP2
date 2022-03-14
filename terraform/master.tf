@@ -20,15 +20,15 @@ resource "azurerm_linux_virtual_machine" "vmMaster" {
     }
 
     plan {
-        name      = "centos-8-2-free"
-        product   = "centos-8-2-free"
+        name      = "centos-8-3-free"
+        product   = "centos-8-3-free"
         publisher = "cognosys"
     }
 
     source_image_reference {
         publisher = "cognosys"
-        offer     = "centos-8-2-free"
-        sku       = "centos-8-2-free"
+        offer     = "centos-8-3-free"
+        sku       = "centos-8-3-free"
         version   = "latest"
     }
 

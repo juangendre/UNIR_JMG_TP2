@@ -20,16 +20,16 @@ resource "azurerm_linux_virtual_machine" "vmMaster" {
     }
 
     plan {
-        name      = "centos-8-stream-free"
-        product   = "centos-8-stream-free"
+        name      = "centos-8-2-free"
+        product   = "centos-8-2-free"
         publisher = "cognosys"
     }
 
     source_image_reference {
         publisher = "cognosys"
-        offer     = "centos-8-stream-free"
-        sku       = "centos-8-stream-free"
-        version   = "1.2019.0810"
+        offer     = "centos-8-2-free"
+        sku       = "centos-8-2-free"
+        version   = "latest"
     }
 
     boot_diagnostics {

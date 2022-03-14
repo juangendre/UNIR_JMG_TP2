@@ -3,13 +3,13 @@
 - name: 'Copio archivo Deploy volumen.yaml'
   copy:
     src: 'volumen.yaml'
-    dest: '/root/kube_deploy/jenkins_ok/'
+    dest: '/tmp/jenkins/'
   become: yes
   become_method: sudo
 
 
 - name: Despliego Volumens
-  command: 'kubectl apply -f /root/kube_deploy/jenkins_ok/volumen.yaml'
+  command: 'kubectl apply -f /tmp/jenkins/volumen.yaml'
   register: result
   become: yes
   become_method: sudo

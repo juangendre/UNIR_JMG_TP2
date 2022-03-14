@@ -3,13 +3,13 @@
 - name: 'Copio archivo Deploy jenkins-services.yaml'
   copy:
     src: 'jenkins-services.yaml'
-    dest: '/root/kube_deploy/jenkins_ok/'
+    dest: '/tmp/jenkins/'
   become: yes
   become_method: sudo
 
 
 - name: Despliego tls
-  command: 'kubectl apply -f /root/kube_deploy/jenkins_ok/jenkins-services.yaml'
+  command: 'kubectl apply -f /tmp/jenkins/jenkins-services.yaml'
   register: result
   become: yes
   become_method: sudo

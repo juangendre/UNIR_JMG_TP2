@@ -1,0 +1,8 @@
+---
+- name: Creo directorios /root/kube_deploy/jenkins
+  file:
+    path: /root/kube_deploy/jenkins_ok
+    state: directory
+  become: yes
+  become_method: sudo
+

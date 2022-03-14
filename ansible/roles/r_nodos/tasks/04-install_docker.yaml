@@ -1,0 +1,59 @@
+---
+- name: 'DEBUG - paquetes a instalar'
+  debug:
+    msg: 'Instalacion de docker'
+
+- name: 'Defino variable docker-ce'
+  set_fact:
+    package_docker_ce: 'docker-ce'
+    
+
+- name: Downlaod packages
+  get_url:
+    url: '{{ item.repo_url | mandatory}}'
+    dest: '{{ item.repo_dest | mandatory}}'
+  #when: 'repo_url is defined and repo_dest  is defined'
+  loop: '{{ repos | mandatory }}'
+  become: yes
+  become_method: sudo
+  
+- name: 'instalo docker ce'
+  command: dnf install docker-ce -y
+  #  name: '{{ package_docker_ce }}'
+  #  state: present
+  become: yes
+  become_method: sudo
+
+#- name: 'Inicializa servicio y setea inicio automatico para servicio docker'
+#  systemd:
+#    name: 'docker'
+#    state: started
+#    enabled: yes
+#  become: yes
+#  become_method: sudo
+
+- name: Setea inicio automatico
+  command: systemctl enable docker.service 
+  become: yes
+  become_method: sudo
+  
+
+- name: 'Copio archivo para config daemon.json'
+  copy:
+    src: 'daemon.json'
+    dest: '/etc/docker/'
+  become: yes
+  become_method: sudo
+
+#- name: Reiniciamos el servicio de docker
+#  systemd:
+#    name: 'docker'
+#    state: reloaded
+#  become: yes
+#  become_method: sudo
+
+
+- name: Inicializa servicio
+  command: systemctl restart docker.service 
+  become: yes
+  become_method: sudo

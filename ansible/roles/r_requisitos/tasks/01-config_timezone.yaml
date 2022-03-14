@@ -1,0 +1,28 @@
+---
+- name: Seteo zona horaria
+  timezone:
+    name: '{{ timezone_name }}'
+  become: yes
+  become_method: sudo
+
+- name: instalar chronyd
+  dnf:
+    name: chrony
+    state: present
+    #exclude:
+    #- chrony
+    #update_cache: yes
+  become: yes
+  become_method: sudo
+
+- name: inicia chronyd
+  command: systemctl restart chronyd.service
+  become: yes
+  become_method: sudo
+
+- name: Ejecutar Timedatectl
+  command: timedatectl set-ntp true
+  become: yes
+  become_method: sudo
+
+

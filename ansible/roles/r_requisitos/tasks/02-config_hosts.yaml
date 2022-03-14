@@ -1,0 +1,11 @@
+---
+- name: Agregar Ip a Hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item.name }}$'
+    line: '{{ item.ip }} {{ item.name }} {{ item.name_long }}'
+    state: present
+  #when: 'var_hosts is defined'
+  with_items: '{{ var_hosts }}'
+  become: yes
+  become_method: sudo

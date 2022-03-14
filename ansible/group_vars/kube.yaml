@@ -1,0 +1,8 @@
+---
+
+# Seteamos la configuracion para la memoria swap
+timezone_name: 'America/Argentina/Buenos_Aires'
+swap_status: 'no'
+workers_ips: ['192.168.1.111/32','192.168.1.112/32']
+master_range_ip: '192.168.1.110/16'
+nfs_ips_access: ['192.168.1.110','192.168.1.111','192.168.1.112']

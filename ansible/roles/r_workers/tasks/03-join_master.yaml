@@ -1,0 +1,4 @@
+---
+- name: Unir nodo al master
+  debug:
+    msg: Debo tener la IP, PORT, TOKEN y CERT HASH

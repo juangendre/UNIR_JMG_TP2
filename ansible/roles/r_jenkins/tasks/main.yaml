@@ -1,0 +1,16 @@
+---
+
+- include_tasks: 01-prepare_master_deploy.yaml
+
+- include_tasks: 02-creo_namspace.yaml
+
+- include_tasks: 03-deploy_volumen.yaml
+
+- include_tasks: 04-deploy_service_account.yaml
+
+- include_tasks: 05-deploy_jenkins.yaml
+
+- include_tasks: 06-deploy_services.yaml
+
+- include_tasks: 07-deploy_ingress.yaml
+

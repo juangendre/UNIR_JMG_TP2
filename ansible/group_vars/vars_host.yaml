@@ -1,0 +1,16 @@
+var_hosts:
+  - name: master
+    ip: 20.228.246.112
+    name_long: master.terra.ip
+    
+  - name: worker1
+    ip: 20.228.246.171
+    name_long: master.terra.ip
+  
+  - name: worker2
+    ip: 20.228.246.17
+    name_long: worker2.terra.ip
+
+  - name: nfs
+    ip: 
+    name_long: nfs.terra.ip

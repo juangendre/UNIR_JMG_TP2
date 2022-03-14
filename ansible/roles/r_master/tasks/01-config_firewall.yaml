@@ -1,0 +1,26 @@
+---
+
+- name: 'Configura los puertos para los workers'
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+    zone: public
+  loop: '{{ ports_workers }}'
+  #when: "'master' in ansible_hostname"
+  become: yes
+  become_method: sudo
+
+#- name: Reiniciamos el servicio de firewall
+#  systemd:
+#    name: firewalld
+#    state: reloaded
+#  become: yes
+#  become_method: sudo
+
+
+- name: Obtengo las imagenes de Kubeadmn
+  command: systemctl restart firewalld
+  register: result
+  become: yes
+  become_method: sudo

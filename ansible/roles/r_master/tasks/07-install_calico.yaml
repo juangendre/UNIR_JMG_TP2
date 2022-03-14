@@ -1,0 +1,55 @@
+---
+#- name: populate /etc/environment
+#  lineinfile:
+#    dest: "/etc/environment"
+#    state: present
+#    regexp: "KUBECONFIG="
+#    line: " KUBECONFIG=/etc/kubernetes/admin.conf"
+#  become: yes
+#  become_method: sudo
+
+
+- name: Obtengo las imagenes de calico
+  #command: 'kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml'
+  command: 'kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml'
+  register: result
+  become: yes
+  become_method: sudo
+
+#- name: Downlaod packages
+#  get_url:
+#    url: 'https://docs.projectcalico.org/manifests/custom-resources.yaml'
+#    dest: '/root/'
+#  become: yes
+#  become_method: sudo
+
+#- name: Cambio IP Calico
+#  lineinfile:
+#    dest: /root/custom-resources.yaml
+#    regexp: '(.*cidr:)(.*)'
+#    line: '\1 {{ master_range_ip }}'
+#    backrefs: yes
+#    #state: present
+#  become: yes
+#  become_method: sudo
+
+#- name: Aplico configuracion custom-resources.yaml
+#  command: 'kubectl apply -f /root/custom-resources.yaml'
+#  register: result
+#  become: yes
+#  become_method: sudo
+
+- name: Obtengo los nodos
+  command: 'kubectl get nodes'
+  register: result
+  become: yes
+  become_method: sudo
+
+- name: Obtengo los pods
+  command: 'kubectl get pods -A'
+  register: result
+  become: yes
+  become_method: sudo
+
+#- debug:
+#    msg: 'Lista de nodos: {{ result }}'

@@ -1,0 +1,32 @@
+---
+
+- name: 'Defino variable'
+  set_fact:
+    package_firewall: 'firewalld'
+
+- name: instala firewall
+  dnf:
+    name: '{{ package_firewall }}'
+    state: present
+    #update_cache: yes
+  register: result
+  become: yes
+
+- name: Deshabilitamos AllowZoneDrifting
+  lineinfile:
+    dest: /etc/firewalld/firewalld.conf
+    regexp: 'AllowZoneDrifting.*'
+    line: 'AllowZoneDrifting=no'
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: Setea inicio automatico
+  command: systemctl enable firewalld.service 
+  become: yes
+  become_method: sudo
+  
+- name: Inicializa servicio
+  command: systemctl restart firewalld.service 
+  become: yes
+  become_method: sudo

@@ -1,0 +1,60 @@
+---
+- name: 'DEBUG - paquetes a instalar'
+  debug:
+    msg: 'Instalacion de Kubernet'
+
+- name: 'Copio archivo para config repo | kubernetes.repo'
+  copy:
+    src: 'kubernetes.repo'
+    dest: '/etc/yum.repos.d/'
+  become: yes
+  become_method: sudo
+  
+#- name: 'instalo los paquete kubelet,kubeadm,kubectl'
+#  dnf:
+#    name: [kubelet,kubeadm,kubectl]
+#    disable_excludes: kubernetes
+#    state: present
+#  become: yes
+#  become_method: sudo
+  
+- name: 'instalo docker kubelet'
+  command: dnf install kubelet -y
+  #  name: '{{ package_docker_ce }}'
+  #  state: present
+  become: yes
+  become_method: sudo
+  
+- name: 'instalo docker kubeadm'
+  command: dnf install kubeadm -y
+  #  name: '{{ package_docker_ce }}'
+  #  state: present
+  become: yes
+  become_method: sudo
+  
+- name: 'instalo docker kubectl'
+  command: dnf install kubectl -y
+  #  name: '{{ package_docker_ce }}'
+  #  state: present
+  become: yes
+  become_method: sudo
+
+
+- name: Setea inicio automatico kubelet
+  command: systemctl enable kubelet.service 
+  become: yes
+  become_method: sudo
+  
+- name: Inicializa servicio kubelet
+  command: systemctl restart kubelet.service 
+  become: yes
+  become_method: sudo
+
+
+#- name: 'Inicializa servicio y setea inicio automatico para servicio kubelet'
+#  systemd:
+#    name: 'kubelet'
+#    state: started
+#    enabled: yes
+#  become: yes
+#  become_method: sudo

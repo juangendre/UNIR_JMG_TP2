@@ -1,0 +1,23 @@
+---
+- name: "DEBUG - paquetes a instalar"
+  debug:
+    var: packages
+
+- name: "Creo array de paquetes a instalar"
+  set_fact:
+     list_packages: "{{ packages.split(',') }}"
+  when: packages is defined
+
+- name: DEBUG - lista de paquetes a instalar
+  debug:
+    var: list_packages
+
+- name: "instalar {{ item }}"
+  command: dnf install {{ item }} -y
+    #name: '{{ item }}'
+    #state: present
+    #update_cache: yes
+  register: result
+  become: yes
+  loop: "{{ list_packages }}"
+  when: list_packages is defined

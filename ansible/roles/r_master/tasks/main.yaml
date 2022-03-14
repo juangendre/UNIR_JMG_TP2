@@ -1,0 +1,19 @@
+---
+
+- include_tasks: 01-config_firewall.yaml
+
+- include_tasks: 02-admin_kubeadm.yaml
+
+- include_tasks: 03-config_firewall_workers.yaml
+
+- include_tasks: 04-initialize_kubeadm.yaml
+
+- include_tasks: 05-Habilito_kube_root.yaml
+
+- include_tasks: 06-Obtengo_lista_nodos.yaml
+
+- include_tasks: 07-install_calico_old.yaml
+
+- include_tasks: 08-install_ingress.yaml
+
+- include_tasks: 09-restar_host.yaml

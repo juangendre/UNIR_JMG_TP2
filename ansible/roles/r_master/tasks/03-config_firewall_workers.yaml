@@ -1,0 +1,55 @@
+---
+
+- name: Habilito ip workers
+  firewalld:
+    rich_rule: 'rule family=ipv4 source address={{ item }} accept'
+    permanent: yes
+    state: enabled
+  loop: '{{ workers_ips }}'
+  become: yes
+  become_method: sudo
+
+#- name: Habilito ip para docker
+#  firewalld:
+#    rich_rule: 'rule family=ipv4 source address=172.17.0.0/16 accept'
+#    permanent: yes
+#    state: enabled
+#  become: yes
+#  become_method: sudo
+
+
+- name: Reiniciamos el servicio de firewall
+  command: systemctl restart firewalld
+  register: result
+  become: yes
+  become_method: sudo
+
+#- name: Reiniciamos el servicio de firewall
+#  systemd:
+#    name: firewalld
+#    state: reloaded
+#  become: yes
+#  become_method: sudo
+
+#- name: Reiniciamos el servicio de docker
+#  systemd:
+#    name: 'docker'
+#    state: reloaded
+#  become: yes
+#  become_method: sudo
+
+
+- name: Obtengo las imagenes de Docker
+  command: systemctl restart docker
+  register: result
+  become: yes
+  become_method: sudo
+
+
+- name: Espera 30 segundos - Reinicia dockers
+  wait_for:
+    timeout: 30
+  delegate_to: localhost
+  become: yes
+  become_method: sudo
+

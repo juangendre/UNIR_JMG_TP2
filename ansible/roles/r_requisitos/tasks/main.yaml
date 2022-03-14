@@ -1,0 +1,15 @@
+---
+
+- include_tasks: 01-config_timezone.yaml
+
+- include_tasks: 02-config_hosts.yaml
+
+- include_tasks: 03-config_seLinux.yaml
+  vars:
+    selinux_status: disabled
+
+- include_tasks: 04-config_firewall.yaml
+
+- include_tasks: 05-install_nfs_utils.yaml
+  vars:
+    packages: 'nfs-utils,nfs4-acl-tools,wget'

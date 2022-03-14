@@ -1,0 +1,9 @@
+---
+
+- include_tasks: 01-config_firewall.yaml
+
+- include_tasks: 02-install_iproute.yaml
+
+- include_tasks: 03-join_master.yaml
+
+#- include_tasks: 04-restar_host.yaml

@@ -1,0 +1,37 @@
+---
+- name: 'DEBUG - paquetes a instalar'
+  debug:
+    msg: 'Instalacion de CRI-O'
+
+- name: Downlaod packages
+  get_url:
+    url: '{{ item.repo_url | mandatory}}'
+    dest: '{{ item.repo_dest | mandatory}}'
+  #when: 'repo_url is defined and repo_dest  is defined'
+  loop: '{{ repos | mandatory }}'
+  become: yes
+  become_method: sudo
+
+- name: 'Copio archivo para config CRI-O'
+  copy:
+    src: 'crio.conf'
+    dest: '/etc/modules-load.d/'
+  become: yes
+  become_method: sudo
+
+  
+- name: 'instalo CRI-O'
+  dnf:
+    name: 'cri-o'
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: 'Inicializa servicio y setea inicio automatico para servicio cri-o'
+  systemd:
+    name: 'crio'
+    state: started
+    enabled: yes
+  become: yes
+  become_method: sudo
+

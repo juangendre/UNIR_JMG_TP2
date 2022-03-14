@@ -1,0 +1,15 @@
+---
+- name: Listo las imagenes de kubeadm
+  command: kubeadm config images list
+  become: yes
+  become_method: sudo
+
+
+- name: Obtengo las imagenes de Kubeadmn
+  command: kubeadm config images pull
+  register: result
+  become: yes
+  become_method: sudo
+
+- debug:
+    msg: 'Pull imagenes: {{ result }}'

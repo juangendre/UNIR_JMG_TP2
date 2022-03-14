@@ -1,0 +1,10 @@
+---
+
+- hosts: nfs
+  vars_files:
+    - 'group_vars/kube.yaml'
+  gather_facts: false
+  roles:
+    - role: r_requisitos
+    - role: r_nfs
+      

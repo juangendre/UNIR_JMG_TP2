@@ -1,0 +1,29 @@
+---
+
+- name: populate /etc/environment
+  lineinfile:
+    dest: "/etc/environment"
+    state: present
+    regexp: "KUBECONFIG="
+    line: " KUBECONFIG=/etc/kubernetes/admin.conf"
+  become: yes
+  become_method: sudo
+
+
+- name: Creo directorios $HOME/.kube
+  file:
+    path: $HOME/.kube
+    state: directory
+  become: yes
+  become_method: sudo
+
+
+- name: Copio archivo configuracion
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: $HOME/.kube/config
+    remote_src: yes
+    owner: root
+    group: root
+  become: yes
+  become_method: sudo

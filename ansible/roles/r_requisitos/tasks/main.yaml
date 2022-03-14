@@ -12,4 +12,4 @@
 
 - include_tasks: 05-install_nfs_utils.yaml
   vars:
-    packages: 'nfs-utils,nfs4-acl-tools,wget'
+    packages: 'nfs-utils,nfs4-acl-tools,wget,net-tools,telnet'

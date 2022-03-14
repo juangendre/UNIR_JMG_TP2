@@ -1,8 +1,8 @@
 ---
-- name: 1 - install packages nfs
-  dnf:
-    name: "{{ packages_nfs }}"
-    state: present
+#- name: 1 - install packages nfs
+#  dnf:
+#    name: "{{ packages_nfs }}"
+#    state: present
 
 - name: 2 - Enable service nfs-server
   ansible.builtin.systemd:

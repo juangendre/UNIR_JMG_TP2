@@ -21,7 +21,7 @@ ports_master_firewall:
     protocol: tcp
 
   
-  firewall_workers_rules:
+firewall_workers_rules:
   - rule: 1
     family: ipv4
     source_address: 192.168.1.111/32

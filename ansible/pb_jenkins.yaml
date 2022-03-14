@@ -4,6 +4,10 @@
   #strategy: debug
   vars_files:
     - 'group_vars/kube.yaml'
+    - 'group_vars/vars_master.yaml'
+    - 'group_vars/vars_host.yaml'
+    - 'group_vars/vars_workers.yaml'
+  become: true
   gather_facts: false
   roles:
     - role: r_jenkins
